@@ -34,28 +34,28 @@ The design borrows from production systems: hash chaining as in Git and blockcha
 ![Architecture](docs/architecture.svg)
 
 ```
-                 ┌──────────────────────────────────────────────┐
+                 ┌───────────────────────────────────────────────┐
    HTTP clients  │                  aegisd                       │
   ───────────►   │                                               │
-  POST /v1/events│   ┌─────────┐   seal     ┌──────────────────┐  │
-                 │   │  API    ├───────────►│  Store            │  │
-                 │   │ handler │            │  hash-chain head  │  │
-                 │   └────┬────┘            │  segmented files  │  │
-                 │        │                 │  Merkle leaves    │  │
-                 │        ▼                 └────────┬─────────┘  │
-                 │   ┌──────────┐                    │            │
-                 │   │ Detect   │  findings as       │ checkpoint │
-                 │   │ engine   │  audit events ─────┘ (Ed25519)  │
-                 │   └──────────┘                                 │
-                 └───────────────────────┬──────────────────────-─┘
+  POST /v1/events│   ┌─────────┐   seal     ┌──────────────────┐ │
+                 │   │  API    ├───────────►│  Store           │ │
+                 │   │ handler │            │  hash-chain head │ │
+                 │   └────┬────┘            │  segmented files │ │
+                 │        │                 │  Merkle leaves   │ │
+                 │        ▼                 └────────┬─────────┘ │
+                 │   ┌──────────┐                    │           │
+                 │   │ Detect   │  findings as       │ checkpoint│
+                 │   │ engine   │  audit events ─────┘ (Ed25519) │
+                 │   └──────────┘                                │
+                 └───────────────────────┬─────────────────────-─┘
                                          │ data/ (segments, keys, checkpoints)
                                          ▼
-                          ┌──────────────────────────────┐
+                          ┌───────────────────────────────┐
                           │  aegis-verify (independent)   │
                           │  replays from disk, recomputes│
                           │  chain + Merkle root, checks  │
                           │  signature with public key    │
-                          └──────────────────────────────┘
+                          └───────────────────────────────┘
 ```
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the data model, on-disk format, and the full threat model.
