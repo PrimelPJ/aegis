@@ -1,0 +1,27 @@
+name: ci
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - name: Vet
+        run: go vet ./...
+      - name: Test (race detector)
+        run: go test ./... -count=1 -race
+      - name: Coverage
+        run: |
+          go test ./... -count=1 -coverprofile=coverage.out
+          go tool cover -func=coverage.out | tail -1
+      - name: Build
+        run: |
+          go build -o /tmp/aegisd ./cmd/aegisd
+          go build -o /tmp/aegis-verify ./cmd/aegis-verify

@@ -1,0 +1,17 @@
+services:
+  aegis:
+    build: .
+    container_name: aegis
+    ports:
+      - "8080:8080"
+    volumes:
+      - aegis-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/aegis-verify", "-data", "/data"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  aegis-data:

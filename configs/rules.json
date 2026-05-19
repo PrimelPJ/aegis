@@ -1,0 +1,50 @@
+[
+  {
+    "id": "brute-force-auth",
+    "description": "Repeated failed authentication for one actor",
+    "severity": "high",
+    "when": [
+      { "field": "action", "op": "eq", "value": "auth.login" },
+      { "field": "outcome", "op": "eq", "value": "failure" }
+    ],
+    "threshold": 5,
+    "window_seconds": 60,
+    "group_by": "actor"
+  },
+  {
+    "id": "privilege-escalation",
+    "description": "Privilege or role elevation performed",
+    "severity": "critical",
+    "when": [
+      { "field": "action", "op": "eq", "value": "iam.role.grant" },
+      { "field": "resource", "op": "contains", "value": "admin" }
+    ]
+  },
+  {
+    "id": "audit-log-tamper-attempt",
+    "description": "Direct operation against the audit subsystem",
+    "severity": "critical",
+    "when": [
+      { "field": "resource", "op": "prefix", "value": "aegis://" }
+    ]
+  },
+  {
+    "id": "data-exfiltration-volume",
+    "description": "High volume of object reads by one actor",
+    "severity": "medium",
+    "when": [
+      { "field": "action", "op": "eq", "value": "object.read" }
+    ],
+    "threshold": 50,
+    "window_seconds": 30,
+    "group_by": "actor"
+  },
+  {
+    "id": "security-control-disabled",
+    "description": "A security control was disabled",
+    "severity": "high",
+    "when": [
+      { "field": "action", "op": "eq", "value": "control.disable" }
+    ]
+  }
+]
