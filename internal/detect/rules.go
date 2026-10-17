@@ -44,6 +44,12 @@ func DefaultRules() []Rule {
 			Severity:    "high",
 			When:        []Condition{{Field: "action", Op: OpEq, Value: "control.disable"}},
 		},
+		{
+			ID:          "service-account-created",
+			Description: "A service account or API credential was created",
+			Severity:    "medium",
+			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.serviceaccount.create"}},
+		},
 	}
 }
 
