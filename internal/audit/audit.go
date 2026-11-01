@@ -1,3 +1,4 @@
+package audit
 
 // Verification tuning constants.
 const (
