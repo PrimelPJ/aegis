@@ -50,6 +50,12 @@ func DefaultRules() []Rule {
 			Severity:    "medium",
 			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.serviceaccount.create"}},
 		},
+		{
+			ID:          "account-mfa-disabled",
+			Description: "MFA was disabled on an account",
+			Severity:    "critical",
+			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.mfa.disable"}},
+		},
 	}
 }
 
