@@ -51,6 +51,12 @@ func DefaultRules() []Rule {
 			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.serviceaccount.create"}},
 		},
 		{
+			ID:          "cross-account-assume-role",
+			Description: "Principal assumed a role in a different account (lateral movement)",
+			Severity:    "high",
+			When:        []Condition{{Field: "action", Op: OpEq, Value: "sts.assumerole"}},
+		},
+		{
 			ID:          "account-mfa-disabled",
 			Description: "MFA was disabled on an account",
 			Severity:    "critical",
