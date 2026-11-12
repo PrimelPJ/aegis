@@ -46,5 +46,13 @@
     "when": [
       { "field": "action", "op": "eq", "value": "control.disable" }
     ]
+  },
+  {
+    "id": "cross-account-assume-role",
+    "description": "Principal assumed a role in a different account (lateral movement)",
+    "severity": "high",
+    "when": [
+      { "field": "action", "op": "eq", "value": "sts.assumerole" }
+    ]
   }
 ]
