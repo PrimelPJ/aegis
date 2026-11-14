@@ -54,5 +54,16 @@
     "when": [
       { "field": "action", "op": "eq", "value": "sts.assumerole" }
     ]
+  },
+  {
+    "id": "token-spray",
+    "description": "Unusual burst of token creation by one actor (credential stuffing signal)",
+    "severity": "high",
+    "when": [
+      { "field": "action", "op": "eq", "value": "token.create" }
+    ],
+    "threshold": 10,
+    "window_seconds": 30,
+    "group_by": "actor"
   }
 ]
