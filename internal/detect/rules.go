@@ -62,6 +62,15 @@ func DefaultRules() []Rule {
 			Severity:    "critical",
 			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.mfa.disable"}},
 		},
+		{
+			ID:            "token-spray",
+			Description:   "Unusual burst of token creation by one actor (credential stuffing signal)",
+			Severity:      "high",
+			When:          []Condition{{Field: "action", Op: OpEq, Value: "token.create"}},
+			Threshold:     10,
+			WindowSeconds: 30,
+			GroupBy:       "actor",
+		},
 	}
 }
 
