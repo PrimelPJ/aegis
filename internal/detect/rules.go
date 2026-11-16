@@ -51,6 +51,12 @@ func DefaultRules() []Rule {
 			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.serviceaccount.create"}},
 		},
 		{
+			ID:          "new-user-created",
+			Description: "A new IAM user account was created",
+			Severity:    "medium",
+			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.user.create"}},
+		},
+		{
 			ID:          "cross-account-assume-role",
 			Description: "Principal assumed a role in a different account (lateral movement)",
 			Severity:    "high",
