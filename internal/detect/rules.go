@@ -77,6 +77,15 @@ func DefaultRules() []Rule {
 			WindowSeconds: 30,
 			GroupBy:       "actor",
 		},
+		{
+			ID:          "sensitive-resource-delete",
+			Description: "Deletion of a sensitive or protected resource (database, key store, audit log)",
+			Severity:    "critical",
+			When: []Condition{
+				{Field: "action", Op: OpEq, Value: "resource.delete"},
+				{Field: "resource", Op: OpPrefix, Value: "critical://"},
+			},
+		},
 	}
 }
 
