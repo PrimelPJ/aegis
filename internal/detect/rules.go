@@ -86,6 +86,12 @@ func DefaultRules() []Rule {
 				{Field: "resource", Op: OpPrefix, Value: "critical://"},
 			},
 		},
+		{
+			ID:          "ssh-key-upload",
+			Description: "SSH public key added to an IAM identity (potential persistent access)",
+			Severity:    "medium",
+			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.sshkey.upload"}},
+		},
 	}
 }
 
