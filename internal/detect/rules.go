@@ -92,6 +92,12 @@ func DefaultRules() []Rule {
 			Severity:    "medium",
 			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.sshkey.upload"}},
 		},
+		{
+			ID:          "password-change",
+			Description: "IAM user password was changed (account takeover preparation or insider threat signal)",
+			Severity:    "medium",
+			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.password.change"}},
+		},
 	}
 }
 
