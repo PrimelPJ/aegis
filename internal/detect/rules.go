@@ -98,6 +98,12 @@ func DefaultRules() []Rule {
 			Severity:    "medium",
 			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.password.change"}},
 		},
+		{
+			ID:          "api-key-rotation-required",
+			Description: "An API key has not been rotated within the required window (stale credential)",
+			Severity:    "medium",
+			When:        []Condition{{Field: "action", Op: OpEq, Value: "iam.apikey.age_exceeded"}},
+		},
 	}
 }
 
